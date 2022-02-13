@@ -104,7 +104,7 @@ function addActive(){
             }
             else{ $(thesldr).eq(b).removeClass("active") }
          currentIndex = parseInt($(".pagination span").eq(b).attr("data-index"))
-         console.log(currentIndex)
+
         })
     }
 }
