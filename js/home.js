@@ -4,7 +4,7 @@ let theImgch = $(".im-to-sh");
 let myImgs = $(".ch-img img");
 let thesldr = $(".slider .container .ctn-sld div");
 let thecontainer = $(".container")
-
+let currentIndex = 0;
 function showImage() {
     for (let a = 0; a < myImgs.length; a++) {
      myImgs[a].onclick = function () {
@@ -14,6 +14,15 @@ function showImage() {
        
      }
     }
+}
+function crPagination() {
+    $(".pagination").empty();
+    for (let i = 0; i < x + 1; i++) {
+      $(".pagination").append($("<span></span>").attr("data-index", i));
+      
+    }
+ 
+    
 }
 function addBorder() {
     for (let i = 0; i < thenav.length; i++) {
@@ -35,51 +44,42 @@ showImage()
 
 function nextimg() {
    
-   let c;
+  
     
     $(".left").on("click",function () {
-c = $(".pagination .active").index();
-    if (c < x) {
+
+    if (currentIndex < x) {
         $(".pagination span").each(function () {
             $(".pagination span").removeClass('active')
         })
-        $(thesldr).eq(c).addClass("active");
-        c++; 
-        $(".pagination span").eq(c).addClass("active")
+        $(thesldr).eq(currentIndex).addClass("active");
+        currentIndex++; 
+        $(".pagination span").eq(currentIndex).addClass("active")
        
-        console.log(c)
+       
     }
 
        })
-       $(".right").on("click",function () {
-        c = $(".pagination .active").index();
-           if (c > 0) {
+
+}
+function prevImg(parms) {
+    $(".right").on("click",function () {
+       
+           if (currentIndex > 0) {
             $(".pagination span").each(function () {
                 $(".pagination span").removeClass('active')
             })
-               c--;
-               $(".pagination span").eq(c).addClass("active")
-            $(thesldr).eq(c).removeClass("active");
+            currentIndex--;
+               $(".pagination span").eq(currentIndex).addClass("active")
+            $(thesldr).eq(currentIndex).removeClass("active");
             
            }
-           console.log(c)
+          
        
     })
 }
-function crPagination() {
-    $(".pagination").empty();
-    for (let i = 0; i < x + 1; i++) {
-       $(".pagination").append($("<span></span>"));
-    }
- 
-    
-}
-// function hideIMg () {
-//     for (let index = 0; index < array.length; index++) {
-//         const element = array[index];
-        
-//     }
-// }
+
+
 function addActive(){
     $(".pagination span").eq(0).addClass("active");
   
@@ -103,7 +103,8 @@ function addActive(){
                 
             }
             else{ $(thesldr).eq(b).removeClass("active") }
-         
+         currentIndex = parseInt($(".pagination span").eq(b).attr("data-index"))
+         console.log(currentIndex)
         })
     }
 }
@@ -136,7 +137,7 @@ function sliderShow() {
    
     crPagination()
     addActive();
-   
+   prevImg()
     nextimg();
 }
 $(window).on("load resize" , sliderShow)
