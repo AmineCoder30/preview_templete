@@ -264,7 +264,7 @@ section {
 }
 
 .section-four .container .bg-ctn .ovr-ctn {
-  background-image: url(/images/ig.png);
+  background-image: url(../images/ig.png);
   background-color:#272733;
   background-size: cover;
   display: -webkit-box;
